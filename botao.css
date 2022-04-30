@@ -1,0 +1,22 @@
+.bot a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.bot{
+   font-size: 35px;
+    font-weight: 700;
+    border: none;
+    margin: 11px;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+}
+.btn-inicio{
+    background: rgb(255, 140, 159);
+    width: fit-content;
+    padding: .5em 1em;
+    border-radius: 15px;
+    list-style-type: none;
+}
