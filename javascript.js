@@ -1,131 +1,124 @@
-let Caneta = [];
-let Marcador = [];
-let kitEscolar  = [];
-function adicionar(materiais, material) { 
-    materiais.push(material);
-}
-function alterar(materiais, material, id) {
-    materiais[id] = material
-}
-function deletar(materiais, id) {
-    materiais.splice(id, 1)
-}
-function listar(materiais) {
-    return materiais
-}
-function controlar_lista(materiais) {
-    materiais = listar(materiais);
-    mostrar_lista(materiais)
-}
-function mostrar_cadastro() {
-    alert('cadastrar') 
-    let nome = prompt('Nome do produto');
-    let valor = parseInt(prompt('Preço do produto'));
-    let descrição = prompt('Descrição do produto ');
-    let material = {
-        nome: nome,
-        valor: valor,
-        descrição: descrição 
-    };
-    return material
-}
-function mostrar_edicao() {
-    let id = parseInt(prompt('Qual id quer editar?'))
-    let material = materiais[id]
-    let nome = prompt(`Qual nome do produto? [${material.nome}]`); 
-    if (nome == '') {
-        nome = material.nome        
-    } 
-    let valor = prompt(`Preço do produto [${material.valor}]`);
-    if (valor == '') {
-        valor = material.valor        
-    } 
-    let descrição = prompt(`Descrição do produto [${material.descrição}]`);
-    if (descrição == '') {
-        descrição = material.descrição        
-    }
-    let materialNovo = {
-        nome: nome,
-        valor: valor,
-        descrição: descrição
-    };
-    return [materialNovo, id]
-    
-}
-function mostrar_delete() {
-    let id = parseInt(prompt('Qual id quer apagar?'))
-    return id 
-}
+class Produto{
+        constructor(){
+            this.id = 1;
+            this.editId = null;
+            this.arrayProdutos = []
+        }
+        cadastrar(){
+            let produto = this.lerDados()
 
-function cadastrar(materiais) {
-    let material = mostrar_cadastro()
-    adicionar(materiais, material)
-}
-//model
-function mostrar_lista(materiais) {
-    //view
-    alert('listar')
-    let mensagem = '';
-    let id = 0;
-    for (let material of materiais) {
-        mensagem += id + ' : ' + material['nome'] + ' - ' + material.valor + ' : ' + material.descrição + '\n';
-        id++ ;
-    }
-    alert(mensagem);
-}   
-function editar(materiais) {
-    controlar_lista(materiais)
-    //control and view
-    let [materialNovo, id] = mostrar_edicao()
-    
-    //model
-    alterar(materiais, materialNovo, id)
-    
-}  
-function apagar(materiais) {
-    controlar_lista(materiais)
-    //control and view
-    let id = mostrar_delete() 
-    //model
-    deletar(materiais, id)
-    
-}
-function menu() {
-    loop:
-        while (true) {
-            //view
-            alert('1-Cadastrar Caneta\n2-Listar Caneta\n3-Cadastrar Marcador\n4-Listar Marcador\n5-Cadastrar KIT Escolar\n6Listar KIT Escolar\n7-Editar\n8-Apagar\n9-Sair');
-            //control and view
-            opcao = prompt('');
-            //control
-            switch (opcao) {
-                case '1': 
-                    cadastrar(Caneta)
-                    break
-                case '2': 
-                    controlar_lista(Caneta)
-                    break
-                case '3':
-                    cadastrar(Marcador)
-                    break
-                case '4':
-                    controlar_lista(Marcador)
-                    break      
-                case '5':
-                    cadastrar(kitEscolar)
-                    break   
-                case '6':
-                    controlar_lista(kitEscolar)
-                    break   
-                case '7':
-                    editar(Caneta)
-                    break
-                case '8':
-                    apagar(Caneta)
-                    break          
-                case '9': 
-                    alert('sair')
-                    break loop;
+            if(this.validaCampos(produto)){
+                if(this.editId == null){
+                    this.adicionar(produto)}
+                else{
+                    this.atualizar(this.editId, produto);
+                }
+            }
+            this.listaTabela();
+            this.cancelar();
+        }
+
+        listaTabela() {
+            let tbody = document.getElementById('tbody');
+            tbody.innerText = '';
+
+            for(let i = 0; i < this.arrayProdutos.length; i++){
+                let tr = tbody.insertRow();
+
+                let td_id = tr.insertCell();
+                let td_produto = tr.insertCell();
+                let td_categoria = tr.insertCell();
+                let td_valor = tr.insertCell();
+                let td_acoes = tr.insertCell();
+                let imgEdit = document.createElement('img');
+                let imgDelet = document.createElement('img');
+                
+                td_id.innerText = this.arrayProdutos[i].id;
+                td_produto.innerText = this.arrayProdutos[i].nomeProduto;
+                td_categoria.innerText = this.arrayProdutos[i].categoria;
+                td_valor.innerText = this.arrayProdutos[i].valor;
+                td_acoes.appendChild(imgEdit)
+                td_acoes.appendChild(imgDelet)
+
+                td_id.classList.add('center');
+                td_acoes.classList.add('center');
+                imgEdit.src = 'https://cdn-icons-png.flaticon.com/512/84/84380.png'
+                imgEdit.setAttribute("onclick", "produto.editar("+ JSON.stringify(this.arrayProdutos[i])+")");
+
+                imgDelet.src = 'https://cdn-icons-png.flaticon.com/512/54/54324.png'
+                imgDelet.setAttribute("onclick", "produto.deletar("+ this.arrayProdutos[i].id +")");
+                
+            }   
+        }
+
+        adicionar(produto){
+            this.arrayProdutos.push(produto);
+            this.id++;
+        }
+        lerDados(){
+            let produto = {}
+
+            produto.id = this.id;
+            produto.nomeProduto = document.getElementById('produto').value;
+            produto.valor = document.getElementById('valor').value;
+            produto.categoria = document.getElementById('categoria').value;
+
+            return produto;
+        }
+
+        validaCampos(produto){
+            let msg = '';
+
+            if(produto.nomeProduto == '') {
+                msg += 'informe o nome do produto \n';
+            }
+            if(produto.valor == '') {
+                msg += 'informe o valor do produto \n';
+            }
+            if(msg != '') {
+                alert(msg);
+                return false
+            }
+            return true;
+        }
+        
+        cancelar() {
+            document.getElementById('produto').value = '';
+            document.getElementById('valor').value = '';
+
+            document.getElementById('btn1').innerText = 'Salvar';
+            this.editId = null;
+        
+        }
+        deletar(id) {
+            let tbody = document.getElementById('tbody');
+
+            for(let i = 0; i < this.arrayProdutos.length; i++) {
+                if(this.arrayProdutos[i].id == id) {
+                    this.arrayProdutos.splice(i, 1);
+                    tbody.deleteRow(i);
+                }
+            }
+
+        }
+        editar(dados) {
+            this.editId = dados.id;
+
+            document.getElementById('produto').value = dados.nomeProduto;
+            document.getElementById('valor').value = dados.valor;
+            document.getElementById('categoria').value = dados.categoria;
+            document.getElementById('btn1').innerText = 'Atualizar';
+        }
+
+        atualizar(id, produto) {
+            for(let i = 0; i < this.arrayProdutos.length; i++){
+                if(this.arrayProdutos[i].id == id) {
+                    this.arrayProdutos[i].nomeProduto = produto.nomeProduto;
+                    this.arrayProdutos[i].valor = produto.valor;
+                    this.arrayProdutos[i].categoria = produto.categoria;
+                }
             }
         }
 }
+
+var produto = new Produto();

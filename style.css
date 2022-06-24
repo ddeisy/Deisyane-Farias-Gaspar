@@ -1,12 +1,21 @@
-body {
-    background-color: rgb(255, 167, 196);
+*{
+    margin: 0;
 }
-
 header { 
     font-size: 30px;
     display: flex;
     flex-direction:column;
     place-items: center;
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(252, 49, 117);
+    color:#fff
+}
+main{
+    padding: 30px 50px;
+}
+form {
+    font-size: 20px;
 }
 
 .titulo {
@@ -15,59 +24,24 @@ header {
     flex-direction:column;
     place-items: center;
 }
-.botao a{
-    color: #fff;
-    text-decoration: none;
-}
-.botao a:hover{
-    background: rgb(255, 92, 119);
-}
-.botao{
-    /* font-size: 28px; */
-    font-weight: 700;
-    border: none;
-    /* margin: 10px; */
-    cursor: pointer;
-    display: inline-block;
-    text-decoration: none;
-    color: #fff;
-}
-.btn-pink{
-    background: rgb(255, 140, 159);
-    width: fit-content;
-    /* padding: .5em 1em; */
-    border-radius: 10px;
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    place-items: center;}
 
 .login {
-    font-size: 35px;
-}
-form {
-    font-size: 20px;
+    display: flex;
+    flex-direction:column;
+    place-items: center;
 }
 .box { 
     width: 150px;
 	display: inline-block;
     text-decoration: none;
     border: none;
-    margin: 60px;
-}
-.btn-catalogo {
-    background: rgb(255, 140, 159);
-    width: fit-content;
-    padding: .5em 1em;
-    border-radius: 10px;
-    list-style-type: none;
+    margin: 30px;
 }
 .menu ul{
     list-style: none;
-    background: rgb(255, 140, 159);
     padding: 0;
     margin: 0;  
-    text-align: center;
+    text-align: left;
 }
 .menu li{
     display: inline-block; 
@@ -79,14 +53,13 @@ form {
     width: 100px; 
     display:  inline-block;  
     padding: 20px 15px;
-    font-size: 15px;
-    text-transform: uppercase;
+    background-color: rgb(252, 49, 117);
+    font-size: 20px;
     font-weight: bold;
-    text-align: center;
-    position: relative;
+    text-align: left
 }
 .menu a:hover{
-    background: rgb(255, 92, 119);
+    background-color: rgb(255, 0, 85);
 }
 .menu ul ul{
     display: none;
@@ -95,7 +68,61 @@ form {
     display: block;
 }
 .menu ul ul ul{
-    margin-left: 10px;
     top:0px;
     position: absolute;
+}
+
+.cadastro{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+.lineInput{
+    display: grid;
+    margin-bottom: 10px;
+}
+input{
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+button{
+    border: 0px;
+    padding: 10px;
+    outline: 0;
+    background-color: rgb(252, 49, 117);
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all ease 0.5s;
+}
+button:hover{
+    background-color: rgb(255, 0, 85);
+}
+button a{
+    color: #fff;
+    text-decoration: none;
+}
+.tabela{
+    margin-top: 15px;
+}
+table{
+    border-collapse: collapse;
+    border: 1px solid rgb(236, 233, 233);
+    width: 100%;
+}
+table th{
+    background-color: rgb(241, 229, 229);
+    text-align: left;
+}
+table td img{
+    width: 20px;
+}
+.center{
+    text-align: center;
+}
+.title{
+    font-size: 35px;
 }

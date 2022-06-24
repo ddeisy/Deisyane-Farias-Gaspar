@@ -1,56 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="estrela rosa glitter png.png" type="image/x-icon">
     <title>LOJA PURPURINA</title>
+    <link rel="stylesheet" href="style.css">
     <script src="javascript.js"></script>
-    <script src="cadasjava.js"></script>
 </head>
 <body>
     <header>
-        <h1>LOJA PURPURINA</h1>
+        <h1>LOJA DA PURPURINA</h1>
     </header>
-    <div>
-    <h1>Cadastre um item:</h1>
-    <form action="" onsubmit="controlar_cadastro()" class="cadastro">
-        <label>
-            <span>Nome do produto</span>
-            <input name="nome" type="text" id="nome"/>
-        </label>
-    </div>
-    <div>
-        <label>
-            Valor:
-            <input type="number">
-        </label>
-    </div>
-    <div>
-        <label>
-            Descrição:
-            <textarea name="descricao" cols="30" rows="10"
-            id="descricao"></textarea> <br>
-        </label>
-    </div>
-    <div>
-        <label for="produto" >Foto do produto:</label>
-        <input name="produto" type="file" id="produto"/>
-    </div>
-    <div>
-        <button>Enviar Formulário</button>
-    </div>
-    </form>
-    <button onclick="menu()">Menu</button>
-    <div>
-    <button onclick="controlar_lista(Caneta)">Exibir lista de caneta</button>
-    </div>
-    <div>
-    <button onclick="controlar_lista(Marcador)">Exibir lista de marcador</button>
-    </div>
-    <div>
-    <button onclick="controlar_lista(kitEScolar)">Exibir lista de KIT Escolar</button>
-    </div>
-
+    <main>
+        <div class="title">
+            <h2>Cadastre seu produto</h2>
+        </div>
+        <div class="cadastro">
+            <label for="categoria">Categoria</label>
+            <select id="categoria">
+                <option value="Caneta">Caneta</option>
+                <option value="marcador">Marcador</option>
+                <option value="KIT">KIT</option>
+            </select>
+            <div class="lineInput">
+                <label>Produto</label>
+                <input type="text" id="produto">
+            </div>
+            <div class="lineInput">
+                <label>Preço</label>
+                <input type="text" id="valor">
+            </div>
+            <button onclick="produto.cadastrar()" id="btn1">Cadastrar</button>
+            <button onclick="produto.cancelar()">Cancelar</button>
+        </div>
+        <div class="tabela">
+            <table border="1">
+                <thead>
+                    <th class="center">ID</th>
+                    <th>PRODUTO</th>
+                    <th class="center">VALOR</th>
+                    <th class="center">AÇÃO</th>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
